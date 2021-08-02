@@ -1,6 +1,12 @@
 import pandas as pd
+from zipfile import ZipFile
 
 def merging_files():
+
+    with ZipFile('input_data.zip', 'r') as zipObj:
+        # Extract all the contents of zip file in different directory
+        zipObj.extractall('input_data')
+        print('File is unzipped in temp folder')
 
     #Contains Movie Id, Title and Genre/s
     movies= pd.read_table("input_data/movies.dat", sep="::")
