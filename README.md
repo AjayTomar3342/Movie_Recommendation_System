@@ -104,69 +104,28 @@ Since, the libraries used in the project are updated by the original developers 
 ## Procedure followed in the Project:
 
    * **Step 1:**
-   Data Scraping using Beautiful Soup using Genre Based Movie Links of IMDB. Scraping results are appended   	into Pre-cleaned-file.csv for further processing. 
+   Movie data is taken from Kaggle in .dat format. Data is ingested from three files. movies.dat, 	        ratings.dat, users.dat provide movie data, their respective ratings data and users rating data. These        three are then merged in a suitable way for further processing. Input file is above 50 mb(GitHub limit) 	so a zipped version of it is unzipped for furthe procedure to avoid GitHub heavy file limit. 
    
    * **Step 2:**
-   Data Cleaning is followed then as the data scraped is pretty dirty and needs to be molded into a suitable 	form for Data Analysis. This step takes in Pre-cleaned-file.csv and produces a cleaner Python-cleaned-	    file.csv for Data Analysis. 
+   Then using Matrix Factorization Collaborative Filtering is done on the input data. This is a mathematical 	approach for Movie Recommendation using data about Users and Movies both. A user-movie matrix is made as    it's important for the matrix factorization step. In this user-movie matrix NA values can be filled          either by mean or by median. This mean/median is taken with respect to the movie rating from the user        movie matrix. Both options are available for us to use and witness difference in the recommendations as      the project output.  
   
    * **Step 3:**
-   Taking in Python-cleaned-file.csv, data is analysed on basis of various parameters(mentioned in the 	        Results section below). Using matplotlib, the analysis results are analysed too. Data Visualization is 	    also done using a Visualization Tool(Power BI) which is done using IMDB_Data_Power_BI_file.pbix.
+   Movie prediction can be done using two ways:
+   1. Finding similar users to the user we are recommending movies for and then recommending the similar 	users movies. 
+   2. Finding similar movies as per the user interests(for which we are finding movies). 
+
+   To select the first option above, one must uncomment Line No. 30 and 39 and comment Line No. 33 and 36 in 	file named main.py in the Root Folder of the repository. 
    
-   * **Step 4:**
-   In the last step, various regression models such as Multiple Linear Regression, Lasso Regression,         	K-Nearest Neighbor and Random Forest Regression. These models are tested upon parameters like R2 Score,      Mean Squared Error and Model Score to evaluate model performance. 
+   To select the second option above, one must uncomment Line No. 33 and 36 and comment Line No. 30 and 39      in file named main.py in the Root Folder of the repository. 
+   
 
   **NOTE:** 
-All csv files mentioned in the above steps are present in the Data_Files folder. Power BI file is present in the Root Folder. 
+All .dat files mentioned in the above steps are present in the input_data folder. Power BI file is present in the Root Folder. 
 
 ## Results:
 
-Results are present in two forms: Analysis Results(Graphical) and Regression Results(Numerical). 
+When recommendations are made on basis of finding similar users, first similar users are shown in the console(in decreasing order of similarity) and then recommended movies are shown. 
 
-### Analysis Results: 
+In case of finding similar movies as per user interests, recommended movies are shown directly. 
 
-Cleaned Data is analyzed on the following parameters: 
-
-1. Movie title proportion as per Starting Character.
-2. Decade Wise Movie Count.
-3. Most successful Primary Actor with at least 30 movies. 
-4. Most successful Supporting Actor with at least 15 movies.
-5. Most successful Directors with at least 20 movies.
-6. Most successful Secondary Supporting Actor with at least 10 movies.
-7. Movie proportion according to different genres.
-8. User votes by consecutive years in the last century.
-9. Average runtime of movies year wise in the last century.
-10. Year Wise count of movies. 
-11. Genre Popularity over the last century.
-
-All these analysis are done using both Python and Power BI. Some of the visuals are shown below: 
-
-<img src="Results/Visual_Result_1.PNG"> 
-<img src="Results/Visual_Result_2.PNG"> 
-<img src="Results/Visual_Result_3.PNG"> 
-
-Above visuals are taken from Power BI Visualization tool which provides better clarity when compared to Python's Matplotlib library.
-
-### Regression Results:
-
-Metric Scores for Models | Multiple Linear Regression | Lasso Regression | K-Nearest Neighbor | Random Forest Regression
----                      | --- | --- | --- | ---
-R2 Score                 | 44.7 | 45.3 | 43.4 | 69.6
-Mean Squared Error	 | 60 | 59.3 | 61.4 | 32.9
-Model Score 		 | 44.2 | 44.7 | 52.7 | 95.7
-
-These scores are calculated on the basis of usage of Python's scikit-learn library. 
-
-To explain the Metrics and their relevance here, the metrics are explained below:
-
-a.) R2 Score/Coefficient of Determination:  Means the % of variation of dependent variable which can be explained by independent variable. More the merrier. 
-
-b.) Mean Squared Error(MSE): MSE measures the average of error squares i.e the average squared difference between the estimated values and true value. Less the better. 
-
-c.) Model Score: Comparing the model predicted values to the actual values which we got by test data. More the number of matching values, the better
-
-  **NOTE:** 
-Please note that these figures and visuals have been taken on 27/8/2021. These may differ from the ones you get once you run this project again as data is scraped again and the whole procedure provides similar yet different results.  
-
-
-
-
+In both cases, good recommendations were made as observed by 3-4 peers of mine. 
